@@ -4,7 +4,14 @@ import { useCallback, useEffect, useState } from 'react';
 import { LocalDoacao } from '../models/LocalDoacao';
 import { listarLocais } from '../services/localDoacaoService';
 
+//navegação detalhes
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { RootStackParamList } from '../navigation/types';
+
+
 export default function ListaScreen() {
+  const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const [locais, setLocais] = useState<LocalDoacao[]>([]);
   const [carregando, setCarregando] = useState(true);
   const [erro, setErro] = useState('');
@@ -212,8 +219,11 @@ export default function ListaScreen() {
           </View>
         ) : (
           <View style={styles.listaLocais}>
-            {locais.map((local) => (
-              <View key={local.id} style={styles.cartaoLocal}>
+              {locais.map((local) => (
+              <TouchableOpacity key={local.id} style={styles.cartaoLocal} onPress={() =>
+                  navigation.navigate('Detalhe', { local })}
+                activeOpacity={0.8}>
+                  
                 <View style={styles.iconeLocal}>
                   <Text style={styles.emojiLocal}>⌖</Text>
                 </View>
@@ -232,11 +242,13 @@ export default function ListaScreen() {
                   <Text style={styles.telefoneLocal}>
                     Tel.: {local.telefone}
                   </Text>
+
+                  <Text style={styles.linkAtalho}>
+                    Ver detalhes →
+                  </Text>
                 </View>
-              </View>
+              </TouchableOpacity>
             ))}
-          </View>
-        )}
 
         {!carregando && erro !== '' && locais.length > 0 && (
           <Text style={styles.avisoAtualizacao}>

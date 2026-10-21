@@ -2,8 +2,8 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
 
 import ListaScreen from './screens/ListaScreen';
-/*import DetalheScreen from './screens/DetalheScreen';
-import EdicaoScreen from './screens/EdicaoScreen';
+import DetalheScreen from './screens/DetalheScreen';
+/*import EdicaoScreen from './screens/EdicaoScreen';
 import CadastroScreen from './screens/CadastroScreen';*/
 
 import { RootStackParamList } from './navigation/types';
@@ -25,16 +25,15 @@ export default function App() {
           }}
         />
 
-        {/*<Stack.Screen
+        <Stack.Screen
           name="Detalhe"
           component={DetalheScreen}
           options={{
-            title: 'Detalhes',
+            title: 'Detalhes do local',
             headerTintColor: '#B92240',
           }}
         />
-
-        <Stack.Screen
+        {/*<Stack.Screen
           name="Edicao"
           component={EdicaoScreen}
           options={{
